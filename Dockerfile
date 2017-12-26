@@ -44,6 +44,9 @@ USER gdk
 
 # Install rbenv
 RUN git clone https://github.com/sstephenson/rbenv.git /home/gdk/.rbenv
+RUN export PATH=${PATH}:/home/gdk/.rbenv/shims
+RUN export PATH=${PATH}:/home/gdk/.rbenv/bin
+RUN echo 'export PATH="$PATH:/home/gdk/.rbenv/shims"' >> /home/gdk/.bash_profile
 RUN echo 'export PATH="/home/gdk/.rbenv/bin:$PATH"' >> /home/gdk/.bash_profile
 RUN echo 'eval "$(rbenv init -)"' >> /home/gdk/.bash_profile
 
