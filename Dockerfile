@@ -4,6 +4,10 @@ LABEL authors.contributor "carlos <huaixian.huang@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
+# set root password
+
+RUN echo "root:bo9bo7va" | chpasswd
+
 # install essentials
 
 RUN apt-get update
