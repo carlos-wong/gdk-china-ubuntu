@@ -1,4 +1,4 @@
-FROM beginor/ubuntu-china:latest
+FROM liufang/ubuntu-china-source:latest
 LABEL authors.maintainer "carlos <huaixian.huang@gmail.com>"
 LABEL authors.contributor "carlos <huaixian.huang@gmail.com>"
 
