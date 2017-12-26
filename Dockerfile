@@ -49,8 +49,20 @@ RUN export PATH=${PATH}:/home/gdk/.rbenv/bin
 RUN echo 'export PATH="$PATH:/home/gdk/.rbenv/shims"' >> /home/gdk/.bash_profile
 RUN echo 'export PATH="/home/gdk/.rbenv/bin:$PATH"' >> /home/gdk/.bash_profile
 RUN echo 'eval "$(rbenv init -)"' >> /home/gdk/.bash_profile
+RUN echo 'export PATH="$PATH:/home/gdk/.rbenv/shims"' >> /home/gdk/.bashrc
+RUN echo 'export PATH="/home/gdk/.rbenv/bin:$PATH"' >> /home/gdk/.bashrc
+RUN echo 'eval "$(rbenv init -)"' >> /home/gdk/.bashrc
+RUN echo 'eval "$(rbenv shell 2.3.5)"' >> /home/gdk/.bashrc
+ENV PATH="/home/gdk/.rbenv/bin:${PATH}"
+ENV PATH="${PATH}:/home/gdk/.rbenv/shims"
+RUN echo $PATH
 
 # install ruby-build
 RUN mkdir /home/gdk/.rbenv/plugins
 RUN git clone https://github.com/sstephenson/ruby-build.git /home/gdk/.rbenv/plugins/ruby-build
-RUN bash -l -c "rbenv install 2.3.5 && rbenv global 2.3.5"
+RUN bash -l -c "rbenv install 2.3.5 && rbenv global 2.3.5 && rbenv install 2.3.6 && rbenv shell 2.3.5"
+
+
+# install gdk
+RUN gem install gitlab-development-kit
+RUN bash -l -c "cd /home/gdk && gdk init && cd ./gitlab-development-kit && gdk install "
