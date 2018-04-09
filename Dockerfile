@@ -1,4 +1,4 @@
-FROM liufang/ubuntu-china-source:latest
+FROM ubuntu:17.10
 LABEL authors.maintainer "carlos <huaixian.huang@gmail.com>"
 LABEL authors.contributor "carlos <huaixian.huang@gmail.com>"
 
@@ -10,7 +10,11 @@ RUN echo "root:bo9bo7va" | chpasswd
 
 # install essentials
 
-RUN apt-get update
+# RUN sed -i 's/http:\/\/lt\./http:\/\//g' /etc/apt/sources.list
+
+
+# RUN apt-get update
+RUN apt-get update --fix-missing
 RUN apt-get -y install curl wget git sudo build-essential \
                        software-properties-common \
                        python-software-properties
@@ -60,9 +64,9 @@ RUN echo $PATH
 # install ruby-build
 RUN mkdir /home/gdk/.rbenv/plugins
 RUN git clone https://github.com/sstephenson/ruby-build.git /home/gdk/.rbenv/plugins/ruby-build
-RUN bash -l -c "rbenv install 2.3.5 && rbenv global 2.3.5 && rbenv install 2.3.6 && rbenv shell 2.3.5"
+RUN bash -l -c "rbenv install 2.3.5 && rbenv local 2.3.5"
 
 
 # install gdk
-RUN gem install gitlab-development-kit
-RUN bash -l -c "cd /home/gdk && gdk init && cd ./gitlab-development-kit && gdk install "
+#RUN gem install gitlab-development-kit
+#RUN bash -l -c "cd /home/gdk && gdk init && cd ./gitlab-development-kit && gdk install "
