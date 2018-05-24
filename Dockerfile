@@ -1,10 +1,12 @@
-FROM ubuntu:17.10
+FROM ubuntu:16.04
 LABEL authors.maintainer "carlos <huaixian.huang@gmail.com>"
 LABEL authors.contributor "carlos <huaixian.huang@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # set root password
+
+COPY source.list /etc/apt/sources.list
 
 RUN echo "root:bo9bo7va" | chpasswd
 
@@ -25,7 +27,7 @@ RUN apt-get install -y git postgresql postgresql-contrib libpq-dev \
                        ed pkg-config libsqlite3-dev libreadline-dev libssl-dev
 
 # install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
 RUN apt-get install -y nodejs
 
 # GDK tools
@@ -64,8 +66,9 @@ RUN echo $PATH
 # install ruby-build
 RUN mkdir /home/gdk/.rbenv/plugins
 RUN git clone https://github.com/sstephenson/ruby-build.git /home/gdk/.rbenv/plugins/ruby-build
-RUN bash -l -c "rbenv install 2.3.5 && rbenv local 2.3.5"
-
+#RUN bash -l -c "rbenv install 2.3.5 && rbenv local 2.3.5"
+RUN rbenv install 2.3.5
+RUN rbenv install 2.3.6
 
 # install gdk
 #RUN gem install gitlab-development-kit
