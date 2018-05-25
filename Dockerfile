@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.1
 LABEL authors.maintainer "carlos <huaixian.huang@gmail.com>"
 LABEL authors.contributor "carlos <huaixian.huang@gmail.com>"
 
@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # set root password
 
-COPY source.list /etc/apt/sources.list
+COPY source_tsinghua.list /etc/apt/sources.list
 
 RUN echo "root:bo9bo7va" | chpasswd
 
